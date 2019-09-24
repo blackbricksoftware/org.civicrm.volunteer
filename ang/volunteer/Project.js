@@ -503,7 +503,6 @@
       $route.reload();
     });
 
-
   });
 
 })(angular, CRM.$, CRM._);

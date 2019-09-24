@@ -203,6 +203,12 @@
             setTimeout(function(){ // need this to be after other call backs to make sure DOM content loaded
               var $form = $widget.find('form');
               $form.find('.crm-submit-buttons').remove();
+              $form.find('[name]').each(function(){
+                var name = $(this).attr('name');
+                var required = $(this).hasClass('required');
+                // doesn't work
+                $(this).attr('ng-model', name).attr('ng-required', required ? 'true' : 'false');
+              });
               $form.children().insertAfter(elem);
               $container.remove();
             }, 1);
