@@ -102,35 +102,42 @@
      *   With HTML tags.
      */
     $scope.formatLocation = function (project) {
+
       var result = '';
 
       var locBlockData = project['api.VolunteerProject.getlocblockdata'].values;
-      if (_.isEmpty(locBlockData)) {
+      if (_.isEmpty(locBlockData))
         return result;
-      }
-
+      
       var address = locBlockData[0].address;
-      if (_.isEmpty(address)) {
+      
+      if (_.isEmpty(address))
         return result;
-      }
+      
+      var rows = [];
 
-      if (address.street_address) {
-        result += address.street_address;
-      }
+      if (address.name)
+        rows.push(address.name);
 
-      if (address.street_address && (address.city || address.postal_code)) {
-        result += '<br />';
-      }
+      if (address.street_address)
+        rows.push(address.street_address);
+
+      var cityStateZip = '';
 
       if (address.city) {
-        result += address.city;
+        cityStateZip += address.city;
       }
 
       if (address.city && address.postal_code) {
-        result += ', ' + address.postal_code;
+        cityStateZip += ', ' + address.postal_code;
       } else if (address.postal_code) {
-        result += address.postal_code;
+        cityStateZip += address.postal_code;
       }
+
+      if (cityStateZip.length>0)
+        rows.push(cityStateZip);
+
+      result = rows.join('<br />');
 
       return result;
     };
