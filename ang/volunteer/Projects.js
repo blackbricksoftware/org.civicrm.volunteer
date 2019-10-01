@@ -24,6 +24,7 @@
           projectData: function(crmApi) {
             return crmApi('VolunteerProject', 'get', {
               sequential: 1,
+              options: {limit: 0},
               context: 'edit',
               'api.VolunteerProjectContact.get': {
                 relationship_type_id: "volunteer_beneficiary"
